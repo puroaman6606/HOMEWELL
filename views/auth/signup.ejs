@@ -1,0 +1,168 @@
+<%- include('../partials/head') %>
+</head>
+
+<body>
+  <%- include('../partials/header') %>
+
+<main class="min-h-screen flex items-center justify-center bg-linear-to-b from-rose-50 to-rose-100 p-6">
+  <section class="w-full max-w-xl bg-linear-to-br from-rose-100 via-rose-50 to-rose-200 rounded-2xl shadow-2xl p-8 sm:p-10">
+    
+    <header class="mb-6 text-center">
+      <h1 class="text-3xl font-semibold text-green-600">Create your account</h1>
+      <p class="mt-2 text-sm text-rose-600">Join the community and get started!</p>
+    </header>
+
+    <form action="/signup" method="POST" class="space-y-5">
+
+      <!-- Errors -->
+      <%- include('../partials/errors') %>
+
+
+      <!-- Full Name -->
+      <div>
+        <label for="fullname" class="block text-sm font-medium text-pink-800 mb-1">
+          Full name
+        </label>
+        <input
+          id="fullname"
+          name="fullname"
+          value="<%= oldInput && oldInput.fullname ? oldInput.fullname : '' %>"
+          required
+          class="w-full rounded-lg border border-pink-300 bg-white px-4 py-3 placeholder-pink-300 
+                 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent"
+          placeholder="Aman Prajapati"
+        />
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-pink-800 mb-1">
+          Email
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          value="<%= oldInput && oldInput.email ? oldInput.email : '' %>"
+          required
+          class="w-full rounded-lg border border-pink-300 bg-white px-4 py-3 placeholder-pink-300 
+                 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent"
+          placeholder="you@example.com"
+        />
+      </div>
+
+      <!-- User Type -->
+      <div>
+        <label class="block text-sm font-medium text-pink-800 mb-2">
+          User type
+        </label>
+
+        <div class="grid grid-cols-2 gap-3">
+
+          <!-- Guest -->
+          <label class="flex items-center justify-center gap-2 p-3 rounded-xl border border-pink-300 
+                        cursor-pointer bg-white hover:bg-pink-50 transition">
+            <input
+              type="radio"
+              name="usertype"
+              value="guest"
+              <%= oldInput && oldInput.usertype === 'guest' ? 'checked' : '' %>
+              required
+              class="h-4 w-4 text-pink-600"
+            />
+            <span class="text-pink-700 font-medium">Guest</span>
+          </label>
+
+          <!-- Host -->
+          <label class="flex items-center justify-center gap-2 p-3 rounded-xl border border-pink-300 
+                        cursor-pointer bg-white hover:bg-pink-50 transition">
+            <input
+              type="radio"
+              name="usertype"
+              value="host"
+              <%= oldInput && oldInput.usertype === 'host' ? 'checked' : '' %>
+              required
+              class="h-4 w-4 text-pink-600"
+            />
+            <span class="text-pink-700 font-medium">Host</span>
+          </label>
+
+        </div>
+      </div>
+
+      <!-- Passwords -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label for="password" class="block text-sm font-medium text-pink-800 mb-1">
+            Password
+          </label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            required
+            class="w-full rounded-lg border border-pink-300 bg-white px-4 py-3 placeholder-pink-300 
+                   focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent"
+            placeholder="At least 8 characters"
+          />
+        </div>
+
+        <div>
+          <label for="confirm" class="block text-sm font-medium text-pink-800 mb-1">
+            Confirm password
+          </label>
+          <input
+            id="confirm"
+            name="confirmPassword"
+            type="password"
+            required
+            class="w-full rounded-lg border border-pink-300 bg-white px-4 py-3 placeholder-pink-300 
+                   focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent"
+            placeholder="Re-enter password"
+          />
+        </div>
+      </div>
+
+      <!-- Terms -->
+      <div class="text-sm text-pink-700">
+        <label class="inline-flex items-start gap-2">
+          <input
+            type="checkbox"
+            name="terms"
+            <%= oldInput && oldInput.terms ? 'checked' : '' %>
+            required
+            class="mt-1 h-4 w-4 rounded border-pink-300 text-pink-600 focus:ring-pink-300"
+          />
+          <span>
+            I agree to the
+            <a href="/terms" class="font-medium text-pink-800 underline decoration-dotted">
+              Terms & Privacy
+            </a>
+          </span>
+        </label>
+      </div>
+
+      <!-- Submit -->
+      <button
+        type="submit"
+        class="w-full mt-1 inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 
+               text-sm font-medium text-white shadow-md
+               bg-linear-to-r from-rose-400 via-rose-500 to-rose-600 
+               hover:scale-[1.01] active:scale-99 transition">
+        Create account
+      </button>
+
+      <!-- Login -->
+      <p class="mt-3 text-center text-sm text-pink-700">
+        Already have an account?
+        <a href="/login" class="ml-1 font-medium text-pink-800 underline">
+          Log in
+        </a>
+      </p>
+
+    </form>
+  </section>
+</main>
+
+</body>
+</html>

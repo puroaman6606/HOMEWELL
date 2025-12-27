@@ -1,0 +1,155 @@
+
+
+ <%- include('../partials/head')%> 
+</head>
+<body class="bg-gray-900">
+
+<%- include('../partials/header') %>     
+<main class="pt-24 pb-24 bg-linear-to-br from-gray-900 via-gray-800 to-black text-white">
+
+    <!-- HERO IMAGE -->
+    <section class="max-w-6xl mx-auto px-6 mb-16">
+        <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+            <img 
+                src="/<%= home.photoUrl %>" 
+                alt="House Photo"
+                class="w-full h-[420px] object-cover"
+            />
+
+            <!-- Gradient Overlay -->
+            <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent"></div>
+
+            <!-- Floating Info -->
+            <div class="absolute bottom-6 left-6 right-6">
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-3">
+                    <%= home.houseName %>
+                </h1>
+                <p class="text-lg text-gray-200 flex items-center gap-2">
+                    📍 <%= home.location %>
+                </p>
+            </div>
+
+            <!-- Favourite Floating -->
+            <div class="absolute top-6 right-6 bg-white/90 rounded-full p-2 shadow-lg">
+                <%- include('../partials/favourite', { home: home }) %>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTENT GRID -->
+    <section class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-12">
+
+        <!-- LEFT CONTENT -->
+        <div class="lg:col-span-2 space-y-10">
+
+            <!-- Dynamic Moving Text -->
+            <div class="overflow-hidden">
+                <p class="text-xl text-pink-400 font-semibold animate-pulse">
+                    ✨ One of the most loved stays by guests
+                </p>
+            </div>
+
+            <!-- Description Block -->
+            <div class="bg-white/5 backdrop-blur rounded-2xl p-8 border border-white/10">
+                <h2 class="text-2xl font-bold mb-4">
+                    About this place
+                </h2>
+                <p class="text-gray-300 leading-relaxed">
+                    Experience comfort, privacy, and a peaceful stay in this carefully curated home.
+                    Perfect for solo travelers, couples, or small families looking for a memorable stay.
+                </p>
+            </div>
+
+            <!-- Highlights -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 text-center">
+                <div class="bg-white/5 rounded-xl p-5 border border-white/10">
+                    🏡 <p class="mt-2 font-semibold">Entire place</p>
+                </div>
+                <div class="bg-white/5 rounded-xl p-5 border border-white/10">
+                    🧼 <p class="mt-2 font-semibold">Clean & safe</p>
+                </div>
+                <div class="bg-white/5 rounded-xl p-5 border border-white/10">
+                    🌙 <p class="mt-2 font-semibold">Peaceful stay</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT BOOKING CARD -->
+       <!-- RIGHT BOOKING CARD -->
+<div class="bg-white text-gray-900 rounded-3xl shadow-2xl p-8 sticky top-28">
+
+    <p class="text-3xl font-extrabold mb-2">
+        ₹ <%= home.rent %>
+        <span class="text-lg font-normal text-gray-500">/ night</span>
+    </p>
+
+    <p class="text-gray-500 mb-6">
+        Best price guaranteed
+    </p>
+
+    <!-- REAL BOOKING FORM -->
+    <form action="/bookings" method="POST" class="space-y-5">
+
+        <input type="hidden" name="homeId" value="<%= home._id %>">
+
+        <!-- Dates -->
+        <div class="border rounded-2xl overflow-hidden">
+            <div class="grid grid-cols-2 border-b">
+                <div class="p-4">
+                    <label class="text-xs text-gray-500">CHECK-IN</label>
+                    <input
+                        type="date"
+                        name="checkIn"
+                        required
+                        class="w-full outline-none font-medium mt-1"
+                    />
+                </div>
+
+                <div class="p-4 border-l">
+                    <label class="text-xs text-gray-500">CHECK-OUT</label>
+                    <input
+                        type="date"
+                        name="checkOut"
+                        required
+                        class="w-full outline-none font-medium mt-1"
+                    />
+                </div>
+            </div>
+
+            <!-- Guests -->
+            <div class="p-4">
+                <label class="text-xs text-gray-500">GUESTS</label>
+                <select
+                    name="guests"
+                    class="w-full font-medium outline-none mt-1">
+                    <option value="1">1 guest</option>
+                    <option value="2">2 guests</option>
+                    <option value="3">3 guests</option>
+                    <option value="4">4 guests</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <button
+            type="submit"
+            class="w-full bg-pink-500 hover:bg-pink-600
+                   text-white font-bold py-4 rounded-full text-lg transition shadow-lg">
+            Reserve now
+        </button>
+
+        <p class="text-center text-sm text-gray-500">
+            You won’t be charged yet
+        </p>
+    </form>
+
+</div>
+
+
+    </section>
+
+</main>
+
+</body>
+</html>

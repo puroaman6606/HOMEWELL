@@ -1,0 +1,28 @@
+{
+  "name": "introtoexpress",
+  "version": "1.0.0",
+  "description": "creating server using express",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "Aman",
+  "license": "ISC",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.17",
+    "@tailwindcss/postcss": "^4.1.17",
+    "bcryptjs": "^3.0.3",
+    "connect-mongo": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.2.1",
+    "express-session": "^1.18.2",
+    "express-validator": "^7.3.1",
+    "mongoose": "^9.0.1",
+    "multer": "^2.0.2",
+    "postcss": "^8.5.6",
+    "razorpay": "^2.9.6",
+    "tailwindcss": "^4.1.17"
+  }
+}

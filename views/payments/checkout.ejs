@@ -1,0 +1,62 @@
+<%- include('../partials/head') %>
+</head>
+
+<body class="bg-gray-50">
+<%- include('../partials/header') %>
+
+<main class="max-w-xl mx-auto px-6 py-16 text-center">
+
+  <h1 class="text-3xl font-bold mb-6">
+    Complete Payment
+  </h1>
+
+  <div class="bg-white rounded-3xl shadow-xl p-8">
+    <p class="text-lg font-semibold mb-4">
+      <%= booking.home.houseName %>
+    </p>
+
+    <p class="text-gray-600 mb-6">
+      Total: ₹ <%= booking.totalPrice %>
+    </p>
+
+    <button
+      id="payBtn"
+      class="w-full bg-pink-500 hover:bg-pink-600
+             text-white font-bold py-4 rounded-full transition">
+      Pay Now
+    </button>
+  </div>
+
+  <form id="paymentForm" action="/payments/verify" method="POST">
+    <input type="hidden" name="razorpay_order_id">
+    <input type="hidden" name="razorpay_payment_id">
+    <input type="hidden" name="razorpay_signature">
+    <input type="hidden" name="bookingId" value="<%= booking._id %>">
+  </form>
+
+</main>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+  const options = {
+    key: "<%= razorpayKey %>",
+    amount: "<%= booking.totalPrice * 100 %>",
+    currency: "INR",
+    name: "Airbnb Clone",
+    description: "Home Booking Payment",
+    order_id: "<%= orderId %>",
+    handler: function (response) {
+      document.querySelector('[name="razorpay_order_id"]').value = response.razorpay_order_id;
+      document.querySelector('[name="razorpay_payment_id"]').value = response.razorpay_payment_id;
+      document.querySelector('[name="razorpay_signature"]').value = response.razorpay_signature;
+      document.getElementById('paymentForm').submit();
+    }
+  };
+
+  const rzp = new Razorpay(options);
+  document.getElementById('payBtn').onclick = () => rzp.open();
+</script>
+
+</body>
+</html>

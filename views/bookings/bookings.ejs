@@ -1,0 +1,114 @@
+<%- include('../partials/head') %>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+<%- include('../partials/header') %>
+
+<main class="max-w-6xl mx-auto px-6 py-12">
+
+  <!-- Page Header -->
+  <div class="mb-10">
+    <h1 class="text-4xl font-extrabold text-gray-900">
+      My Bookings
+    </h1>
+    <p class="text-gray-500 mt-2">
+      View and manage your reservations
+    </p>
+  </div>
+
+  <!-- EMPTY STATE -->
+  <% if (bookings.length === 0) { %>
+    <div class="bg-white rounded-3xl shadow-lg p-12 text-center">
+      <p class="text-xl text-gray-600 mb-6">
+        You have no bookings yet 😕
+      </p>
+
+      <a href="/"
+         class="inline-block px-6 py-3 bg-pink-500 hover:bg-pink-600
+                text-white font-semibold rounded-full transition">
+        Explore Homes
+      </a>
+    </div>
+  <% } else { %>
+
+  <!-- BOOKINGS LIST -->
+  <div class="space-y-8">
+
+    <% bookings.forEach(b => { %>
+
+      <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
+
+        <!-- Home Image -->
+        <img
+          src="/<%= b.home.photoUrl %>"
+          alt="Home image"
+          class="w-full h-56 object-cover"
+        />
+
+        <!-- Content -->
+        <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <!-- LEFT: Home Info -->
+          <div class="md:col-span-2">
+            <h2 class="text-2xl font-bold text-gray-900">
+              <%= b.home.houseName %>
+            </h2>
+
+            <p class="text-gray-600 mt-1">
+              📍 <%= b.home.location %>
+            </p>
+
+            <div class="mt-4 space-y-1 text-gray-700">
+              <p>
+                📅 <%= b.checkIn.toDateString() %>
+                →
+                <%= b.checkOut.toDateString() %>
+              </p>
+
+              <p>
+                👥 Guests: <%= b.guests %>
+              </p>
+            </div>
+          </div>
+
+          <!-- RIGHT: Price + Actions -->
+          <div class="flex flex-col justify-between">
+
+            <div>
+              <p class="text-lg font-bold text-gray-900">
+                ₹ <%= b.totalPrice %>
+              </p>
+
+              <span class="inline-block mt-2 px-4 py-1 rounded-full text-sm font-semibold
+                <%= b.status === 'paid'
+                  ? 'bg-green-100 text-green-700'
+                  : 'bg-yellow-100 text-yellow-700' %>">
+                <%= b.status.toUpperCase() %>
+              </span>
+            </div>
+
+            <!-- Actions -->
+            <div class="mt-6">
+              <a
+                href="/bookings/<%= b._id %>"
+                class="block text-center px-4 py-3 rounded-full
+                       bg-indigo-500 hover:bg-indigo-600
+                       text-white font-semibold transition">
+                View Details
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    <% }) %>
+
+  </div>
+
+  <% } %>
+
+</main>
+</body>
+</html>

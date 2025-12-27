@@ -1,0 +1,92 @@
+ <%- include('../partials/head')%> 
+</head>
+<body class=" bg-white border-b border-gray-200 shadow-sm sticky">
+
+<%- include('../partials/header') %>     
+<main class="pt-24 pb-20 bg-gray-50">
+
+    <!-- Page Intro -->
+    <section class="max-w-7xl mx-auto px-6 mb-14">
+        <h2 class="text-4xl font-semibold text-gray-900 mb-2">
+            Explore stays
+        </h2>
+        <p class="text-gray-500 text-lg">
+            Find comfortable homes for your next trip
+        </p>
+    </section>
+
+    <!-- Homes Grid -->
+    <section class="max-w-7xl mx-auto px-6">
+        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+
+            <% if (registeredHomes.length === 0) { %>
+
+                <li class="col-span-full text-center py-24">
+                    <p class="text-gray-400 text-lg">
+                        No homes available at the moment.
+                    </p>
+                </li>
+
+            <% } else { %>
+
+                <% registeredHomes.forEach((h) => { %>
+
+                    <li class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition overflow-hidden group">
+
+                        <!-- Image -->
+                        <div class="relative">
+                            <a href="/homes/<%= h._id %>">
+                                <img 
+                                    src="/<%= h.photoUrl %>" 
+                                    alt="Home image"
+                                    class="w-full h-40 object-cover"
+                                />
+                            </a>
+
+                            <!-- Favourite Button -->
+                            <div class="absolute top-3 right-3 bg-white/90 rounded-full p-2 shadow">
+                                <%- include('../partials/favourite', { home: h }) %>
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="p-5">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-lg font-semibold text-gray-900 truncate">
+                                    <%= h.houseName %>
+                                </h3>
+                            </div>
+
+                            <p class="text-sm text-gray-500 mt-1">
+                                <%= h.location %>
+                            </p>
+
+                            <div class="flex justify-between items-center mt-4">
+                                <p class="font-semibold text-gray-900">
+                                    ₹ <%= h.rent %>
+                                    <span class="text-sm text-gray-500 font-normal">/ night</span>
+                                </p>
+
+                                <a href="/homes/<%= h._id %>"
+                                   class="text-sm font-medium text-pink-500 hover:underline">
+                                    View details
+                                </a>
+                            </div>
+                        </div>
+
+                    </li>
+
+                <% }) %>
+
+            <% } %>
+
+        </ul>
+    </section>
+
+</main>
+n>
+
+
+
+</body>
+</html>

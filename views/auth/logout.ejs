@@ -1,0 +1,38 @@
+
+<%- include('../partials/head') %>
+</head>
+
+<body>
+  <%- include('../partials/header') %>
+<main class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+  <div class="w-full max-w-md bg-white shadow-lg rounded-2xl p-8">
+    
+    <h2 class="text-2xl font-semibold text-gray-800 text-center mb-6">
+      Logout
+    </h2>
+
+    <p class="text-gray-600 text-center mb-6">
+      Are you sure you want to log out of your account?
+    </p>
+
+    <form action="/logout" method="POST" class="space-y-4">
+      <!-- Confirm Logout Button -->
+      <button 
+        type="submit" 
+        class="w-full py-3 rounded-xl bg-red-500 hover:bg-red-600 text-white font-semibold transition">
+        Yes, Log me out
+      </button>
+
+      <!-- Cancel / Go Back Button -->
+      <a 
+        href="/" 
+        class="block w-full py-3 rounded-xl border border-gray-300 text-gray-700 text-center font-medium hover:bg-gray-50 transition">
+        Cancel
+      </a>
+    </form>
+
+  </div>
+</main>
+
+</body>
+</html>
