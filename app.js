@@ -30,7 +30,7 @@ app.use(express.urlencoded({extended:true}));       //parses client data from fo
 app.use(express.static(path.join(rootDir,'public')));  //serves static files from 'public' directory
 
 app.use(session({
-    secret:"hdsuggh",
+    secret:process.env.SESSION_SECRET,
     resave:false,
     saveUninitialized:true,
     store
